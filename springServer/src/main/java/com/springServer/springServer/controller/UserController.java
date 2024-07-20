@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpHeaders;
 import com.springServer.springServer.dbinterface.UserRepository;
 import com.springServer.springServer.modal.UserModal;
+import com.springServer.springServer.utils.JwtAuth;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,6 +27,9 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private JwtAuth jwtAuth;
 
     @PostMapping("/register")
     public ResponseEntity<?> registeUser(@RequestBody UserModal user) {
@@ -59,7 +64,8 @@ public class UserController {
             if (!bCryptPasswordEncoder.matches(post.getPassword(), user.getPassword())) {
                 return new ResponseEntity<>("Pssword Don't matches", HttpStatus.OK);
             }
-            return new ResponseEntity<>("Login Successfully", HttpStatus.OK);
+            String token = jwtAuth.generatetoken(post.getName());
+            return new ResponseEntity<>(token, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
         }
@@ -92,6 +98,24 @@ public class UserController {
             }
             userRepository.delete(user);
             return new ResponseEntity<>("Account Deleted Successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/validate-token")
+    public ResponseEntity<?> validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        try {
+            if (token == null || !token.startsWith("Bearer ")) {
+                return new ResponseEntity<>("Authorization header missing or invalid", HttpStatus.BAD_REQUEST);
+            }
+            String newToken = token.substring(7);
+            boolean isValid = jwtAuth.validateToken(newToken);
+            if (isValid) {
+                return new ResponseEntity<>("Token is valid", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Token is invalid", HttpStatus.UNAUTHORIZED);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
         }
