@@ -1,10 +1,28 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Footer from "./pages/Footer";
+import Home from "./pages/Home";
+import Restaurant from "./pages2/Restaurant";
+import History from "./pages2/History";
+import Resfoodlist from "./pages2/Resfoodlist";
+import Restaurantfood from "./pages2/Restaurantfood";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/restaurant" element={<Restaurant />} />
+        <Route path="/restaurant-food-list" element={<Restaurantfood />} />
+        <Route path="/history" element={<History />} />
+      </Routes>
+      
+    </BrowserRouter>
+    <Footer />
+    </>
   );
 };
 
