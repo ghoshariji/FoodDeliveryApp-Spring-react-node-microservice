@@ -7,6 +7,7 @@ import Restaurant from "./pages2/Restaurant";
 import History from "./pages2/History";
 import Resfoodlist from "./pages2/Resfoodlist";
 import Restaurantfood from "./pages2/Restaurantfood";
+import Homeadmin from "./shopadmin/Homeadmin";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/restaurant-food-list" element={<Restaurantfood />} />
         <Route path="/history" element={<History />} />
+        <Route path="/admin-home" element={<Homeadmin />} />
       </Routes>
       
     </BrowserRouter>
