@@ -13,7 +13,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtAuth {
 
-    private String Secret_Key = "abc";
+    private String Secret_Key = "TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V";
 
     private SecretKey signKey() {
         return Keys.hmacShaKeyFor(Secret_Key.getBytes());

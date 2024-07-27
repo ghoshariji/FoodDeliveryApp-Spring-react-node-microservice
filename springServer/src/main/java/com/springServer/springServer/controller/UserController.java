@@ -34,6 +34,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> registeUser(@RequestBody UserModal user) {
         try {
+            System.out.println(user);
             if (userRepository.existsByEmail(user.getEmail())) {
                 return new ResponseEntity<>("User Already Exists", HttpStatus.BAD_REQUEST);
             }
@@ -57,6 +58,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserModal post) {
         try {
+            System.out.println(post);
             if (!userRepository.existsByEmail(post.getEmail())) {
                 return new ResponseEntity<>("User Don't Exists", HttpStatus.BAD_REQUEST);
             }
@@ -64,9 +66,10 @@ public class UserController {
             if (!bCryptPasswordEncoder.matches(post.getPassword(), user.getPassword())) {
                 return new ResponseEntity<>("Pssword Don't matches", HttpStatus.OK);
             }
-            String token = jwtAuth.generatetoken(post.getName());
+            String token = jwtAuth.generatetoken(user.getName());
             return new ResponseEntity<>(token, HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println("Error" + e);
             return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
         }
     }
