@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { loginNow } from "../../auth/userIndex";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [post, setPost] = useState({
     email: "",
     password: "",
@@ -14,8 +14,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = await loginNow(post);
-      localStorage.setItem("token", data);
-      navigate("/home")
+      localStorage.setItem("token", data.token);
+      if (data.userModal.authorize === "ADMIN") navigate("/admin-home");
+      else if(data.userModal.authorize === "USER") navigate("/home");
+      else navigate("/main-admin")
       console.log(data);
     } catch (error) {
       console.log("Error" + error);
@@ -54,7 +56,7 @@ const Login = () => {
                   value={post.email}
                   autoComplete="email"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                 style={{backgroundColor:'white'}}
+                  style={{ backgroundColor: "white" }}
                 />
               </div>
             </div>
@@ -86,7 +88,7 @@ const Login = () => {
                   value={post.password}
                   autoComplete="current-password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  style={{backgroundColor:'white'}}
+                  style={{ backgroundColor: "white" }}
                 />
               </div>
             </div>
