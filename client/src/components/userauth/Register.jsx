@@ -39,40 +39,42 @@ const Register = () => {
           <form onSubmit={handleRegister} method="POST" className="space-y-6">
             <div>
               <label
-                htmlFor="email"
+                htmlFor="name"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Enter name
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
+                  id="name"
                   name="name"
                   type="text"
                   required
                   value={post.name}
                   onChange={handleInput}
-                  className="block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-white-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-white-600 sm:text-sm sm:leading-6"
+                  style={{backgroundColor:'white'}}
                 />
               </div>
             </div>
 
             <div>
               <label
-                htmlFor="email"
+                htmlFor="number"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Enter Phone Number
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
+                  id="number"
                   name="phone"
                   type="number"
                   required
                   value={post.about}
                   onChange={handleInput}
-                  className="block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-white-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white-600 sm:text-sm sm:leading-6"
+                  style={{backgroundColor:'white'}}
                 />
               </div>
             </div>
@@ -92,7 +94,8 @@ const Register = () => {
                   value={post.email}
                   onChange={handleInput}
                   autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-white-300 placeholder:text-white-400 focus:ring-2 focus:ring-inset focus:ring-white-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white-600 sm:text-sm sm:leading-6"
+                  style={{backgroundColor:'white'}}
                 />
               </div>
             </div>
@@ -123,7 +126,8 @@ const Register = () => {
                   value={post.password}
                   onChange={handleInput}
                   autoComplete="current-password"
-                  className="block w-full rounded-md border-0 py-1.5 text-text-900 shadow-sm ring-1 ring-inset ring-text-300 placeholder:text-text-400 focus:ring-2 focus:ring-inset focus:ring-text-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-text-600 sm:text-sm sm:leading-6"
+                  style={{backgroundColor:'white'}}
                 />
               </div>
             </div>

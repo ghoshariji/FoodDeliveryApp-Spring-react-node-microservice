@@ -1,6 +1,7 @@
 package com.springServer.springServer.modal;
 
 public enum Authorize {
+    // here admin and user are the enum constant variables it's works as a constant variables (like final keyword)
     ADMIN("ADMIN"),
     USER("USER");
     private String auth;

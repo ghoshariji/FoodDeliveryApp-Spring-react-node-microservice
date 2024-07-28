@@ -54,6 +54,12 @@ public class UserModal {
         return phone;
     }
 
+    public Authorize getAuthorize() {
+        return authorize;
+    }
+     public void setAuthorize(Authorize authorize) {
+        this.authorize = authorize;
+    }
     @Override
     public String toString() {
         return "UserModal [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="

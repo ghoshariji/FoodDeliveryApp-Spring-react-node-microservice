@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpHeaders;
 import com.springServer.springServer.dbinterface.UserRepository;
+import com.springServer.springServer.modal.Authorize;
 import com.springServer.springServer.modal.UserModal;
+import com.springServer.springServer.response.Response;
 import com.springServer.springServer.utils.JwtAuth;
 
 @CrossOrigin(origins = "*")
@@ -47,6 +49,7 @@ public class UserController {
             newUser.setEmail(user.getEmail());
             newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             newUser.setPhone(user.getPhone());
+            newUser.setAuthorize(Authorize.USER);
             userRepository.save(newUser);
             return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
 
@@ -67,7 +70,8 @@ public class UserController {
                 return new ResponseEntity<>("Pssword Don't matches", HttpStatus.OK);
             }
             String token = jwtAuth.generatetoken(user.getName());
-            return new ResponseEntity<>(token, HttpStatus.OK);
+            Response response = new Response(token, user);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("Error" + e);
             return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);

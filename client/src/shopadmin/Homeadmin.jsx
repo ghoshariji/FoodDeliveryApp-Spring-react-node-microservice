@@ -40,7 +40,7 @@ const Homeadmin = () => {
   return (
     <div>
       <Afternav />
-      <div className="flex flex-row justify-around">
+      <div className="flex flex-row justify-around item-center m-20 p-20">
         <button
           data-modal-target="authentication-modal"
           data-modal-toggle="authentication-modal"
