@@ -69,7 +69,7 @@ public class UserController {
             if (!bCryptPasswordEncoder.matches(post.getPassword(), user.getPassword())) {
                 return new ResponseEntity<>("Pssword Don't matches", HttpStatus.OK);
             }
-            String token = jwtAuth.generatetoken(user.getName());
+            String token = jwtAuth.generatetoken(user.getEmail());
             Response response = new Response(token, user);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
@@ -113,13 +113,17 @@ public class UserController {
     @PostMapping("/validate-token")
     public ResponseEntity<?> validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         try {
+            System.out.println(token);
             if (token == null || !token.startsWith("Bearer ")) {
                 return new ResponseEntity<>("Authorization header missing or invalid", HttpStatus.BAD_REQUEST);
             }
             String newToken = token.substring(7);
             boolean isValid = jwtAuth.validateToken(newToken);
             if (isValid) {
-                return new ResponseEntity<>("Token is valid", HttpStatus.OK);
+                String userName = jwtAuth.getUserName(newToken);
+                UserModal user = userRepository.findByEmail(userName);
+                Response res = new Response(newToken, user);
+                return new ResponseEntity<>(res, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Token is invalid", HttpStatus.UNAUTHORIZED);
             }

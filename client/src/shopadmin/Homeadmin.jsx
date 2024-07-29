@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Afternav from "../components/navabr/Afternav";
 import { addProduct1 } from "../auth/adminIndex";
+import { validateToken } from "../auth/validateToken";
 
 const Homeadmin = () => {
   const [addProduct, setProduct] = useState(false);
-
+  const [sellerId1, setSellerId] = useState("");
   const handleOpenModal = () => {
     setProduct(true);
   };
+
+  const fetchSellerId = async () => {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    try {
+      const data = await validateToken(token);
+      setSellerId(data.userModal.id);
+      console.log(data);
+    } catch (error) {
+      console.log("Error" + error);
+    }
+  };
+  useEffect(() => {
+    fetchSellerId();
+  }, []);
 
   const handleCloseModal = () => {
     setProduct(false);
@@ -17,7 +33,8 @@ const Homeadmin = () => {
     price: "",
     quantity: "",
     description: "",
-    img: "",
+    productImg: "",
+    sellerId: "",
   });
 
   const handleInput = (e) => {
@@ -30,8 +47,15 @@ const Homeadmin = () => {
   const handleAddProduct = async (e) => {
     try {
       e.preventDefault();
-      console.log(post);
-      const data = await addProduct1(post);
+      const formData = new FormData();
+      formData.append("name", post.name);
+      formData.append("price", post.price);
+      formData.append("quantity", post.quantity);
+      formData.append("description", post.description);
+      formData.append("productImg", post.productImg);
+      formData.append("sellerId", sellerId1);
+
+      const data = await addProduct1(formData);
       console.log(data);
     } catch (error) {
       console.log("Error" + error);

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.product.sproduct.dbinterface.ProductInterface;
 import com.product.sproduct.modal.ProductModal;
@@ -30,19 +32,34 @@ public class ProductController {
     private ProductInterface productInterface;
 
     @PostMapping("/add-product")
-    public ResponseEntity<?> addProduct(@RequestBody ProductModal data) {
+    public ResponseEntity<?> addProduct(
+            @RequestPart("name") String name,
+            @RequestPart("price") int price,
+            @RequestPart("quantity") String quantity,
+            @RequestPart("description") String description,
+            @RequestPart("productImg") MultipartFile productImg,
+            @RequestPart("sellerId") String sellerId) {
         try {
+            System.out.println("Name: " + name);
+            System.out.println("Price: " + price);
+            System.out.println("Quantity: " + quantity);
+            System.out.println("Description: " + description);
+            System.out.println("Seller ID: " + sellerId);
+            System.out.println("File: " + productImg.getOriginalFilename());
+
+            // Handle the product image and other data saving here
             ProductModal newData = new ProductModal();
-            newData.setName(data.getName());
-            newData.setPrice(data.getPrice());
-            newData.setDescription(data.getDescription());
-            newData.setProductImg(data.getProductImg());
-            newData.setQuantity(data.getQuantity());
-            newData.setSellerId(data.getSellerId());
+            newData.setName(name);
+            newData.setPrice(price);
+            newData.setDescription(description);
+            newData.setQuantity(quantity);
+            newData.setSellerId(sellerId);
+            // Process and save the image (productImg) as needed
+
             productInterface.save(newData);
             return new ResponseEntity<>("Product Added Successfully", HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("An Error Occured", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("An Error Occurred", HttpStatus.BAD_REQUEST);
         }
     }
 
