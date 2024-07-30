@@ -33,19 +33,19 @@ public class ProductController {
 
     @PostMapping("/add-product")
     public ResponseEntity<?> addProduct(
-            @RequestPart("name") String name,
-            @RequestPart("price") int price,
-            @RequestPart("quantity") String quantity,
-            @RequestPart("description") String description,
-            @RequestPart("productImg") MultipartFile productImg,
-            @RequestPart("sellerId") String sellerId) {
+            @RequestParam("name") String name,
+            @RequestParam("price") int price,
+            @RequestParam("quantity") String quantity,
+            @RequestParam("description") String description,
+            @RequestParam("productImg") MultipartFile productImg,
+            @RequestParam("sellerId") String sellerId) {
         try {
             System.out.println("Name: " + name);
             System.out.println("Price: " + price);
             System.out.println("Quantity: " + quantity);
             System.out.println("Description: " + description);
             System.out.println("Seller ID: " + sellerId);
-            System.out.println("File: " + productImg.getOriginalFilename());
+            System.out.println("File: " + productImg.getBytes());
 
             // Handle the product image and other data saving here
             ProductModal newData = new ProductModal();
@@ -54,8 +54,7 @@ public class ProductController {
             newData.setDescription(description);
             newData.setQuantity(quantity);
             newData.setSellerId(sellerId);
-            // Process and save the image (productImg) as needed
-
+            newData.setProductImg(productImg.getBytes());
             productInterface.save(newData);
             return new ResponseEntity<>("Product Added Successfully", HttpStatus.OK);
         } catch (Exception e) {

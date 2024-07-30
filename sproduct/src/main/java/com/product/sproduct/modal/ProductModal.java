@@ -15,7 +15,7 @@ public class ProductModal {
     private String description;
     private String quantity;
     private String sellerId;
-    private String[] productImg;
+    private byte[] productImg;
 
     public String getId() {
         return id;
@@ -41,7 +41,7 @@ public class ProductModal {
         return sellerId;
     }
 
-    public String[] getProductImg() {
+    public byte[] getProductImg() {
         return productImg;
     }
 
@@ -66,7 +66,7 @@ public class ProductModal {
     }
 
     // storing the value of the data:buffer and content-type:application/json
-    public void setProductImg(String[] productImg) {
+    public void setProductImg(byte[] productImg) {
         this.productImg = productImg;
     }
 

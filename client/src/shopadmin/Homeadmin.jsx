@@ -42,7 +42,7 @@ const Homeadmin = () => {
   };
 
   const handleImg = (e) => {
-    setPost({ ...post, img: e.target.files[0] });
+    setPost({ ...post, productImg: e.target.files[0] });
   };
   const handleAddProduct = async (e) => {
     try {
@@ -56,7 +56,6 @@ const Homeadmin = () => {
       formData.append("sellerId", sellerId1);
 
       const data = await addProduct1(formData);
-      console.log(data);
     } catch (error) {
       console.log("Error" + error);
     }
