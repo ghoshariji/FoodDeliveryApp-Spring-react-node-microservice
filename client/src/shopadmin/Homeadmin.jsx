@@ -56,6 +56,7 @@ const Homeadmin = () => {
       formData.append("sellerId", sellerId1);
 
       const data = await addProduct1(formData);
+      console.log(data)
     } catch (error) {
       console.log("Error" + error);
     }

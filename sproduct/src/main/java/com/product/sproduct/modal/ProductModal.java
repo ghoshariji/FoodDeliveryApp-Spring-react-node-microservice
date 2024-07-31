@@ -14,8 +14,17 @@ public class ProductModal {
     private int price;
     private String description;
     private String quantity;
+    public String getContentType() {
+        return contentType;
+    }
+
     private String sellerId;
     private byte[] productImg;
+    private String contentType;
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 
     public String getId() {
         return id;
@@ -74,7 +83,7 @@ public class ProductModal {
     public String toString() {
         return "ProductModal [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
                 + ", quantity=" + quantity + ", sellerId=" + sellerId + ", productImg=" + Arrays.toString(productImg)
-                + "]";
+                + ", contentType=" + contentType + "]";
     }
 
     public void setSellerId(String sellerId) {

@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/admin-home" element={<Homeadmin />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

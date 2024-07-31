@@ -45,7 +45,7 @@ public class ProductController {
             System.out.println("Quantity: " + quantity);
             System.out.println("Description: " + description);
             System.out.println("Seller ID: " + sellerId);
-            System.out.println("File: " + productImg.getBytes());
+            System.out.println("File: " + productImg.getContentType());
 
             // Handle the product image and other data saving here
             ProductModal newData = new ProductModal();
@@ -55,6 +55,7 @@ public class ProductController {
             newData.setQuantity(quantity);
             newData.setSellerId(sellerId);
             newData.setProductImg(productImg.getBytes());
+            newData.setContentType(productImg.getContentType());
             productInterface.save(newData);
             return new ResponseEntity<>("Product Added Successfully", HttpStatus.OK);
         } catch (Exception e) {
