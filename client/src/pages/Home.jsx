@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <Afternav />
-      <Newlaunch />
+      {/* <Newlaunch /> */}
       <Heroauth />
     </div>
   )

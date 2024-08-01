@@ -4,7 +4,9 @@ const products = createSlice({
   name: "product",
   initialState: [],
   reducers: {
-    addProductToCart(state, action) {},
+    addProductToCart(state, action) {
+      state.push(action.payload);
+    },
   },
 });
 export default products.reducer;

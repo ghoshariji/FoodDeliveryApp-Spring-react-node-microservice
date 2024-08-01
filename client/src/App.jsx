@@ -10,6 +10,7 @@ import Restaurantfood from "./pages2/Restaurantfood";
 import Homeadmin from "./shopadmin/Homeadmin";
 import Login from "./components/userauth/Login";
 import Register from "./components/userauth/Register";
+import Cart from "./pages2/Cart";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/restaurant-food-list" element={<Restaurantfood />} />
           <Route path="/history" element={<History />} />
           <Route path="/admin-home" element={<Homeadmin />} />
+          <Route path="/user-cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
       {/* <Footer /> */}
