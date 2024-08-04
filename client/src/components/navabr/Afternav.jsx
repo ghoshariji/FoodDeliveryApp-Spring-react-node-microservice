@@ -1,41 +1,41 @@
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
-
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link, useNavigate } from "react-router-dom";
 const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
+  name: "Tom Cook",
+  email: "tom@example.com",
   imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+};
 const navigation = [
-  { name: 'Cart', href: '/user-cart', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
-]
+  { name: "Home", href: "#", current: true },
+  { name: "About", href: "#", current: false },
+  { name: "Products", href: "#", current: false },
+  { name: "Helpline", href: "#", current: false },
+];
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
+  { name: "Your Profile", href: "#" },
+  { name: "Sign out", href: "#" },
+];
+
+
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Afternav() {
+  const navigate = useNavigate()
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -54,10 +54,12 @@ export default function Afternav() {
                       <Link
                         key={item.name}
                         to={item.href}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium',
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
                         )}
                       >
                         {item.name}
@@ -71,9 +73,10 @@ export default function Afternav() {
                   <button
                     type="button"
                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    onClick={()=> navigate("/user-cart")}
                   >
                     <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
+                    <span className="sr-only">Cart</span>
                     <BellIcon aria-hidden="true" className="h-6 w-6" />
                   </button>
 
@@ -83,7 +86,11 @@ export default function Afternav() {
                       <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
-                        <img alt="" src={user.imageUrl} className="h-8 w-8 rounded-full" />
+                        <img
+                          alt=""
+                          src={user.imageUrl}
+                          className="h-8 w-8 rounded-full"
+                        />
                       </MenuButton>
                     </div>
                     <MenuItems
@@ -109,8 +116,14 @@ export default function Afternav() {
                 <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
-                  <Bars3Icon aria-hidden="true" className="block h-6 w-6 group-data-[open]:hidden" />
-                  <XMarkIcon aria-hidden="true" className="hidden h-6 w-6 group-data-[open]:block" />
+                  <Bars3Icon
+                    aria-hidden="true"
+                    className="block h-6 w-6 group-data-[open]:hidden"
+                  />
+                  <XMarkIcon
+                    aria-hidden="true"
+                    className="hidden h-6 w-6 group-data-[open]:block"
+                  />
                 </DisclosureButton>
               </div>
             </div>
@@ -123,10 +136,12 @@ export default function Afternav() {
                   key={item.name}
                   as="a"
                   href={item.href}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium',
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base font-medium"
                   )}
                 >
                   {item.name}
@@ -136,18 +151,27 @@ export default function Afternav() {
             <div className="border-t border-gray-700 pb-3 pt-4">
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
-                  <img alt="" src={user.imageUrl} className="h-10 w-10 rounded-full" />
+                  <img
+                    alt=""
+                    src={user.imageUrl}
+                    className="h-10 w-10 rounded-full"
+                  />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                  <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                  <div className="text-base font-medium leading-none text-white">
+                    {user.name}
+                  </div>
+                  <div className="text-sm font-medium leading-none text-gray-400">
+                    {user.email}
+                  </div>
                 </div>
                 <button
                   type="button"
                   className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  onClick={()=> navigate("/user-cart")}
                 >
                   <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
+                  <span className="sr-only">Cart</span>
                   <BellIcon aria-hidden="true" className="h-6 w-6" />
                 </button>
               </div>
@@ -168,5 +192,5 @@ export default function Afternav() {
         </Disclosure>
       </div>
     </>
-  )
+  );
 }
