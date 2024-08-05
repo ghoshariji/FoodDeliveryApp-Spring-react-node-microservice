@@ -1,13 +1,53 @@
-import React, { useEffect, useRef } from 'react';
-
+import React, { useEffect, useRef, useState } from "react";
+import io from "socket.io-client";
 const Userhelpline = () => {
   const messagesEndRef = useRef(null);
-
   // This effect will scroll the messages to the bottom when the component mounts
   useEffect(() => {
     messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   }, []);
 
+  // eastablishing the sokcet connetion
+
+  const [userOnline, setUserOnline] = useState([]);
+  const [senderId, setSenderId] = useState("");
+  const [receiverId, setReceiverId] = useState("");
+  const [chatData, setChatData] = useState([]);
+  useEffect(() => {
+    const userId = localStorage.getItem("id");
+    if (userId) {
+      const socket = io("http://localhost:5000", {
+        // now wrinting the handshake methods
+        query: { userId: userId },
+      });
+
+      // checking for the socket conn
+
+      socket.on("connection", () => {
+        console.log("Socket connected", socket.id);
+      });
+
+      socket.on("user-list", (data) => {
+        setUserOnline(data);
+      });
+
+      socket.on("newMessage", (message) => {
+        if (
+          (message.senderId === senderId &&
+            message.receiverId === receiverId) ||
+          (message.senderId === receiverId && message.receiverId === senderId)
+        ) {
+          // storing the new message with the old data
+          setChatData((prevChatData) => [...prevChatData, message]);
+        }
+      });
+
+      // for the overriding when the socket and the page will mount again then the sokcet will delete the all old data
+      return () => {
+        socket.disconnect;
+      };
+    }
+  }, []);
   return (
     <div className="flex-1 p-2 sm:p-6 justify-between flex flex-col h-screen">
       <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">

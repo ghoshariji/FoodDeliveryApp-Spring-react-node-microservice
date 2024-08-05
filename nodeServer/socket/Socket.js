@@ -30,7 +30,9 @@ const initSocket = (server) => {
   });
 };
 
-const getReceiverId = (id) => userOnline[id];
+const getReceiverId = (id) => {
+  return userOnline[id];
+};
 
 const emitMessage = (socketId, message) => {
   if (io && socketId) {
