@@ -103,6 +103,7 @@ public class ProductController {
     @GetMapping("/get-all-product")
     public ResponseEntity<?> getAllData() {
         try {
+            System.out.println("Come");
             List<ProductModal> data = productInterface.findAll();
             return new ResponseEntity<>(data, HttpStatus.OK);
         } catch (Exception e) {
