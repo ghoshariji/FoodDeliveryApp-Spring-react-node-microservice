@@ -1,16 +1,12 @@
 package com.springServer.springServer.dbinterface;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.springServer.springServer.utils.MultipartSupportConfig;
 
 import jakarta.ws.rs.core.MediaType;
 
@@ -24,7 +20,13 @@ public interface ProductInterface {
             @RequestParam("productImg") MultipartFile productImg,
             @RequestParam("sellerId") String sellerId);
 
-            
     @GetMapping("/api/product/get-all-product")
     public ResponseEntity<?> getAllProd();
+
+    @PostMapping("/api/product/edit-prodcut")
+    public ResponseEntity<?> editProduct(@RequestBody String name,
+            @RequestBody int price,
+            @RequestBody String quantity,
+            @RequestBody String description,
+            @RequestBody String sellerId);
 }
