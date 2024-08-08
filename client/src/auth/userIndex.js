@@ -21,7 +21,7 @@ export const loginNow = async (payload) => {
 export const getAllProduct = async () => {
   try {
     const data = await axios1.get(
-      "http://localhost:5001/api/product/get-all-product"
+      "http://localhost:5000/micro/products/get-product"
     );
     return data.data;
   } catch (error) {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springServer.springServer.dbinterface.ProductInterface;
+import com.springServer.springServer.modal.ProductModal;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -47,13 +48,9 @@ public class ProductController {
     }
 
     @PostMapping("/edit-products")
-    public ResponseEntity<?> editProducts(@RequestBody String name,
-            @RequestBody int price,
-            @RequestBody String quantity,
-            @RequestBody String description,
-            @RequestBody String sellerId) {
+    public ResponseEntity<?> editProducts(@RequestBody ProductModal data) {
         try {
-            return new ResponseEntity<>(productInterface.editProduct(name, price, quantity, description, sellerId),
+            return new ResponseEntity<>(productInterface.editProduct(data),
                     HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("An Error Occurred", HttpStatus.BAD_REQUEST);

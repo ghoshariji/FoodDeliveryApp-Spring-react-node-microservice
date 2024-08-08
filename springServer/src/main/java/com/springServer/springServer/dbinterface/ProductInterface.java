@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.springServer.springServer.modal.ProductModal;
+
 import jakarta.ws.rs.core.MediaType;
 
 @FeignClient(name = "sproduct")
@@ -24,9 +26,5 @@ public interface ProductInterface {
     public ResponseEntity<?> getAllProd();
 
     @PostMapping("/api/product/edit-prodcut")
-    public ResponseEntity<?> editProduct(@RequestBody String name,
-            @RequestBody int price,
-            @RequestBody String quantity,
-            @RequestBody String description,
-            @RequestBody String sellerId);
+    public ResponseEntity<?> editProduct(@RequestBody ProductModal data);
 }

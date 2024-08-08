@@ -6,6 +6,7 @@ const Newlaunch = () => {
 
   const fetchData = async () => {
     try {
+      console.log("Come")
       const result = await getAllProduct();
       setData(result);
       console.log("Fetched data: ", result);
